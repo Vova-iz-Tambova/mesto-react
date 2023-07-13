@@ -4,12 +4,12 @@ import Footer from './Footer'
 
 function App() {
   return (
-    <div className="page">
+    <div className="page__content">
       <Header />
       <Main />
       <Footer />
 
-      <div className="popup  avatar-change">
+      <div className="popup  edit-avatar">
         <div className="popup__container">
           <button className="popup__close  link-effect" type="button"></button>
           <h2 className="popup__title">Обновить аватар</h2>
@@ -44,7 +44,7 @@ function App() {
         </div>
       </div>
 
-      <div className="popup  new-card">
+      <div className="popup  add-place">
         <div className="popup__container">
           <button className="popup__close  link-effect" type="button"></button>
           <h2 className="popup__title">Новое место</h2>
