@@ -1,17 +1,46 @@
+import React from "react"
 import Header from './Header'
 import Main from './Main'
 import Footer from './Footer'
+import PopupWithForm from './PopupWithForm'
+
+
 
 function App() {
+  const [isEditProfilePopupOpen, setisEditProfilePopupOpen] = React.useState(false)
+  const [isAddPlacePopupOpen, setisAddPlacePopupOpen] = React.useState(false)
+  const [isEditAvatarPopupOpen, setisEditAvatarPopupOpen] = React.useState(false)
+
+  function closeAllPopups() {
+    setIsEditProfilePopupOpen(false)
+    setIsEditAvatarPopupOpen(false)
+    setIsAddPlacePopupOpen(false)
+  }
+
+  function handleEditAvatarClick() { setisEditAvatarPopupOpen(true) }
+
+  function handleEditProfileClick() { setIsEditProfilePopupOpen(true) }
+
+  function handleAddPlaceClick() { setIsAddPlacePopupOpen(true) }
+
   return (
     <div className="page__content">
       <Header />
-      <Main />
+      <Main
+        onEditProfile={handleEditProfileClick}
+        onAddPlace={handleAddPlaceClick}
+        onEditAvatar={handleEditAvatarClick}
+      />
       <Footer />
+
+      <PopupWithForm
+        title="Обновить аватар" name="edit-avatar" isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups}
+
+      ></PopupWithForm>
 
       <div className="popup  edit-avatar">
         <div className="popup__container">
-          <button className="popup__close  link-effect" type="button"></button>
+          <button className="popup__close  link-effect" type="button" onClick={closeAllPopups}></button>
           <h2 className="popup__title">Обновить аватар</h2>
           <form className="popup__form" name="form" novalidate>
             <div className="popup__field">
@@ -26,7 +55,7 @@ function App() {
 
       <div className="popup  edit-profile  popup">
         <div className="popup__container">
-          <button className="popup__close  link-effect" type="button"></button>
+          <button className="popup__close  link-effect" type="button" onClick={closeAllPopups}></button>
           <h2 className="popup__title">Редактировать профиль</h2>
           <form className="popup__form" name="form" novalidate>
             <div className="popup__field">
@@ -46,7 +75,7 @@ function App() {
 
       <div className="popup  add-place">
         <div className="popup__container">
-          <button className="popup__close  link-effect" type="button"></button>
+          <button className="popup__close  link-effect" type="button" onClick={closeAllPopups}></button>
           <h2 className="popup__title">Новое место</h2>
           <form className="popup__form" name="form" novalidate>
             <div className="popup__field">
@@ -74,13 +103,7 @@ function App() {
         </div>
       </div>
 
-      <div className="popup  fullscreen">
-        <div className="popup__container-photo">
-          <button className="popup__close  link-effect" type="button"></button>
-          <img src="#" alt="" className="popup__fullscreen-photo" />
-          <h3 className="popup__fullscreen-title">Место</h3>
-        </div>
-      </div>
+
 
       <template className="card" id="card-template">
         <div className="elements__element">
