@@ -1,6 +1,6 @@
 import avatar from '../logo.svg'
 
-function Main({onEditProfile, onAddPlace, onEditAvatar}) {
+function Main({ onEditAvatar, onEditProfile, onAddPlace }) {
   return (
     <main className="main">
 
