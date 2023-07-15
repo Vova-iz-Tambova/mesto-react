@@ -86,17 +86,6 @@ function App() {
         </div>
       </div>
 
-      <template className="card" id="card-template">
-        <div className="elements__element">
-          <img src="#" alt="Место" className="elements__photo" />
-          <h2 className="elements__tag  textcut">Место</h2>
-          <div className="elements__likegroup">
-            <button className="elements__like" type="button"></button>
-            <p className="elements__likecount">0</p>
-          </div>
-          <button className="elements__delete-button  link-effect" type="button"></button>
-        </div>
-      </template>
     </div>
   )
 }

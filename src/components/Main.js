@@ -5,12 +5,19 @@ function Main({ onEditAvatar, onEditProfile, onAddPlace }) {
   const [userName, setUserName] = React.useState("")
   const [userDescription, setUserDescription] = React.useState("")
   const [userAvatar, setUserAvatar] = React.useState("")
+  const [cards, setCards] = React.useState([])
 
   api.getUserInfo()
     .then((res) => {
       setUserName(res.name)
       setUserDescription(res.about)
       setUserAvatar(res.avatar)
+    })
+    .catch(console.error)
+
+  api.getInitialCards()
+    .then((res) => {
+      setCards(res)
     })
     .catch(console.error)
 
@@ -35,8 +42,22 @@ function Main({ onEditAvatar, onEditProfile, onAddPlace }) {
       </section>
 
       <section className="elements">
-
+        {cards.map((card) => (
+          <div className="card" id="card-template">
+            <div className="elements__element">
+              <div style={{ backgroundImage: `url(${card.link})` }} className="elements__photo" />
+              <h2 className="elements__tag  textcut">{card.name}</h2>
+              <div className="elements__likegroup">
+                <button className="elements__like" type="button"></button>
+                <p className="elements__likecount">{card.likes.length}</p>
+              </div>
+              <button className="elements__delete-button  link-effect" type="button"></button>
+            </div>
+          </div>
+        ))
+        }
       </section>
+
     </main>
   )
 }
