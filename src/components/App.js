@@ -3,20 +3,28 @@ import Header from './Header'
 import Main from './Main'
 import Footer from './Footer'
 import PopupWithForm from './PopupWithForm'
+import ImagePopup from './ImagePopup'
 
 function App() {
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false)
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false)
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false)
+  const [selectedCard, setSelectedCard] = React.useState({})
+  const [isImagePopupOpen, setIsImagePopupOpen] = React.useState(false)
 
   function handleEditAvatarClick() { setIsEditAvatarPopupOpen(true) }
   function handleEditProfileClick() { setIsEditProfilePopupOpen(true) }
   function handleAddPlaceClick() { setIsAddPlacePopupOpen(true) }
+  function handleCardClick(card) {
+    setSelectedCard(card)
+    setIsImagePopupOpen(true)
+  }
 
   function closeAllPopups() {
     setIsEditAvatarPopupOpen(false)
     setIsEditProfilePopupOpen(false)
     setIsAddPlacePopupOpen(false)
+    setIsImagePopupOpen(false)
   }
 
   return (
@@ -26,6 +34,7 @@ function App() {
         onEditAvatar={handleEditAvatarClick}
         onEditProfile={handleEditProfileClick}
         onAddPlace={handleAddPlaceClick}
+        onCardClick={handleCardClick}
       />
       <Footer />
 
@@ -74,6 +83,10 @@ function App() {
             </div>
           </>
         }
+      />
+
+      <ImagePopup
+        card={selectedCard} name="image" isOpen={isImagePopupOpen} onClose={closeAllPopups}
       />
 
       <div className="popup  confirm-delete">

@@ -1,7 +1,8 @@
 import React from 'react'
 import api from '../utils/Api'
+import Card from './Card'
 
-function Main({ onEditAvatar, onEditProfile, onAddPlace }) {
+function Main(props) {
   const [userName, setUserName] = React.useState("")
   const [userDescription, setUserDescription] = React.useState("")
   const [userAvatar, setUserAvatar] = React.useState("")
@@ -26,36 +27,25 @@ function Main({ onEditAvatar, onEditProfile, onAddPlace }) {
 
       <section className="profile">
         <button className="profile__avatar-button"
-          onClick={onEditAvatar}>
+          onClick={props.onEditAvatar}>
           <div className="profile__avatar" style={{ backgroundImage: `url(${userAvatar})` }} />
         </button>
         <div className="profile__profile-info">
           <div className="profile__container">
             <h1 className="profile__name textcut">{userName}</h1>
             <button className="profile__edit-button link-effect"
-              onClick={onEditProfile} type="button"></button>
+              onClick={props.onEditProfile} type="button"></button>
           </div>
           <p className="profile__status textcut">{userDescription}</p>
         </div>
         <button className="profile__add-button"
-          onClick={onAddPlace} type="button"></button>
+          onClick={props.onAddPlace} type="button"></button>
       </section>
 
       <section className="elements">
-        {cards.map((card) => (
-          <div className="card" id="card-template">
-            <div className="elements__element">
-              <div style={{ backgroundImage: `url(${card.link})` }} className="elements__photo" />
-              <h2 className="elements__tag  textcut">{card.name}</h2>
-              <div className="elements__likegroup">
-                <button className="elements__like" type="button"></button>
-                <p className="elements__likecount">{card.likes.length}</p>
-              </div>
-              <button className="elements__delete-button  link-effect" type="button"></button>
-            </div>
-          </div>
-        ))
-        }
+        {cards.map((item) => (
+          <Card key={item._id} card={item} onCardClick={props.onCardClick} />
+        ))}
       </section>
 
     </main>
