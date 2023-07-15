@@ -5,6 +5,8 @@
   aspect-ratio: auto;
   border-radius: 50%;
   transition: opacity .3s ease-in-out;
+  background-position: center;
+  background-size: cover;
 }
 
 .profile__avatar:hover {
