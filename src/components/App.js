@@ -54,12 +54,12 @@ function App() {
         children={
           <>
             <div className="popup__field">
-              <input id="profileName" name="profileName" type="text" minlength="2" maxlength="40" required
+              <input id="profileName" name="profileName" type="text" minLength="2" maxLength="40" required
                 className="popup__input  popup__input_profile_name" placeholder="Введите имя" />
               <span id="profileName-error" className="popup__error"></span>
             </div>
             <div className="popup__field">
-              <input id="profileStatus" name="profileStatus" type="text" minlength="2" maxlength="200" required
+              <input id="profileStatus" name="profileStatus" type="text" minLength="2" maxLength="200" required
                 className="popup__input  popup__input_profile_job" placeholder="Введите статус" />
               <span id="profileStatus-error" className="popup__error"> </span>
             </div>
@@ -72,7 +72,7 @@ function App() {
         children={
           <>
             <div className="popup__field">
-              <input id="name" required name="name" type="text" minlength="2" maxlength="30"
+              <input id="name" required name="name" type="text" minLength="2" maxLength="30"
                 className="popup__input  popup__input_mesto_name" placeholder="Название" />
               <span id="name-error" className="popup__error"></span>
             </div>
@@ -93,7 +93,7 @@ function App() {
         <div className="popup__container">
           <button className="popup__close  link-effect" type="button"></button>
           <h2 className="popup__title">Вы уверены?</h2>
-          <form className="popup__form" name="form" novalidate>
+          <form className="popup__form" name="form" noValidate>
             <button className="popup__submit" type="submit">Да</button>
           </form>
         </div>

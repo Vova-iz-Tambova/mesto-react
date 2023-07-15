@@ -5,7 +5,6 @@ function Card(props) {
   }
 
   return (
-    <div className="card" id="card-template">
       <div className="elements__element">
         <div style={{ backgroundImage: `url(${props.card.link})` }} className="elements__photo" onClick={handleClick} />
         <h2 className="elements__tag  textcut">{props.card.name}</h2>
@@ -15,7 +14,6 @@ function Card(props) {
         </div>
         <button className="elements__delete-button  link-effect" type="button"></button>
       </div>
-    </div>
   )
 }
 
