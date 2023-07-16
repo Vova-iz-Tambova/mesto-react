@@ -31,11 +31,11 @@ function Main(props) {
         </button>
         <div className="profile__profile-info">
           <div className="profile__container">
-            <h1 className="profile__name textcut">{userName}</h1>
+            <h1 className="profile__name">{userName}</h1>
             <button className="profile__edit-button link-effect"
               onClick={props.onEditProfile} type="button"></button>
           </div>
-          <p className="profile__status textcut">{userDescription}</p>
+          <p className="profile__status">{userDescription}</p>
         </div>
         <button className="profile__add-button"
           onClick={props.onAddPlace} type="button"></button>
