@@ -9,6 +9,7 @@ function Card(props) {
 
   function handleClick() { props.onCardClick(props.card) }
   function handleLikeClick() { props.onCardLike(props.card) }
+  function handleDeleteClick() { props.onCardDelete(props.card) }
 
   return (
     <div className="element">
@@ -18,7 +19,7 @@ function Card(props) {
         <button className={cardLikeButtonClassName} onClick={handleLikeClick} type="button"></button>
         {props.card.likes.length}
       </div>
-      {isOwn && <button className="element__delete-button  link-effect" type="button" />}
+      {isOwn && <button className="element__delete-button  link-effect" onClick={handleDeleteClick} type="button" />}
     </div>
   )
 }

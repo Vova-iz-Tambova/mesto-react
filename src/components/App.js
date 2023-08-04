@@ -32,13 +32,6 @@ function App() {
     setIsImagePopupOpen(false)
   }
 
-  function handleCardLike(card) {
-    const isLiked = card.likes.some(i => i._id === currentUser._id)
-    api.changeLikeCardStatus(card._id, !isLiked).then((newCard) => {
-      setCards((state) => state.map((c) => c._id === card._id ? newCard : c))
-    })
-  }
-
   React.useEffect(() => {
     Promise.all([
       api.getUserInfo(),
@@ -49,6 +42,20 @@ function App() {
         setCards(cards)
       }).catch(console.error)
   }, [])
+
+  function handleCardLike(card) {
+    const isLiked = card.likes.some(i => i._id === currentUser._id)
+    api.changeLikeCardStatus(card._id, !isLiked).then((newCard) => {
+      setCards((state) => state.map((c) => c._id === card._id ? newCard : c))
+    }).catch(console.error)
+  }
+
+  function handleCardDelete(card){
+    api.delMyCard(card._id)
+    .then(() => {
+      setCards((state) => state.filter((c) => c._id !== card._id))
+    }).catch(console.error)
+  }
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -61,6 +68,7 @@ function App() {
           onCardClick={handleCardClick}
           cards={cards}
           onCardLike={handleCardLike}
+          onCardDelete={handleCardDelete}
         />
         <Footer />
 
