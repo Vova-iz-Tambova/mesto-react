@@ -1,19 +1,9 @@
 import React from 'react'
-import api from '../utils/Api'
 import Card from './Card'
 import CurrentUserContext from '../contexts/CurrentUserContext'
 
 function Main(props) {
-  const [cards, setCards] = React.useState([])
   const currentUser = React.useContext(CurrentUserContext)
-
-  React.useEffect(() => {
-    api.getInitialCards()
-      .then(res => {
-        setCards(res)
-      })
-      .catch(console.error)
-  }, [])
 
   return (
     <main className="main">
@@ -36,8 +26,8 @@ function Main(props) {
       </section>
 
       <section className="elements">
-        {cards.map((item) => (
-          <Card key={item._id} card={item} onCardClick={props.onCardClick} />
+        {props.cards.map((item) => (
+          <Card key={item._id} card={item} onCardClick={props.onCardClick} onCardLike={props.onCardLike}/>
         ))}
       </section>
 

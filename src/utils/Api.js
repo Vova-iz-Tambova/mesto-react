@@ -65,21 +65,12 @@ class Api {
     })
       .then(this._checkResponse)
   }
-  // установка моей отметки
-  setMyLike(cardId) {
+
+  changeLikeCardStatus(cardId, isLiked) {
     return fetch(`${this._baseUrl}/cards/likes/${cardId}`, {
-      method: 'PUT',
+      method: isLiked ? "PUT" : "DELETE",
       headers: this._headers
-    })
-      .then(this._checkResponse)
-  }
-  // снятие моей отметки
-  clearMyLike(cardId) {
-    return fetch(`${this._baseUrl}/cards/likes/${cardId}`, {
-      method: 'DELETE',
-      headers: this._headers
-    })
-      .then(this._checkResponse)
+    }).then(this._checkResponse);
   }
 
 }
