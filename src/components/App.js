@@ -8,6 +8,7 @@ import api from '../utils/Api'
 import CurrentUserContext from '../contexts/CurrentUserContext'
 import EditProfilePopup from './EditProfilepopup'
 import EditAvatarPopup from './EditAvatarPopup'
+import AddPlacePopup from './AddPlacePopup'
 
 function App() {
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false)
@@ -75,6 +76,14 @@ function App() {
       }).catch(console.error)
   }
 
+  function handleAddPlace({ name, link }) {
+    api.setNewCard({ name, link })
+      .then(newCard => {
+        setCards([newCard, ...cards])
+        closeAllPopups()
+      }).catch(console.error)
+  }
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="page__content">
@@ -98,25 +107,12 @@ function App() {
           onClose={closeAllPopups}
           onUpdateAvatar={handleUpdateAvatar}
         />
-        <Footer />
-
-        <PopupWithForm
-          title="Новое место" name="add-place" isOpen={isAddPlacePopupOpen} onClose={closeAllPopups}
-          children={
-            <>
-              <div className="popup__field">
-                <input id="name" required name="name" type="text" minLength="2" maxLength="30"
-                  className="popup__input  popup__input_mesto_name" placeholder="Название" />
-                <span id="name-error" className="popup__error"></span>
-              </div>
-              <div className="popup__field">
-                <input id="link" required name="link" type="url" className="popup__input  popup__input_mesto_link"
-                  placeholder="Ссылка на картинку" />
-                <span id="link-error" className="popup__error"></span>
-              </div>
-            </>
-          }
+        <AddPlacePopup
+          isOpen={isAddPlacePopupOpen}
+          onClose={closeAllPopups}
+          onAddPlace={handleAddPlace}
         />
+        <Footer />
 
         <ImagePopup
           card={selectedCard} name="image" isOpen={isImagePopupOpen} onClose={closeAllPopups}
