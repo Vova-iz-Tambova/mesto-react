@@ -13,9 +13,9 @@ function App() {
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false)
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false)
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false)
-  const [selectedCard, setSelectedCard] = React.useState({})
   const [isImagePopupOpen, setIsImagePopupOpen] = React.useState(false)
 
+  const [selectedCard, setSelectedCard] = React.useState({})
   const [cards, setCards] = React.useState([])
   const [currentUser, setCurrentUser] = React.useState({})
 
@@ -111,22 +111,13 @@ function App() {
           onClose={closeAllPopups}
           onAddPlace={handleAddPlace}
         />
-        <Footer />
-
         <ImagePopup
-          card={selectedCard} name="image" isOpen={isImagePopupOpen} onClose={closeAllPopups}
+          name="image"
+          card={selectedCard}
+          isOpen={isImagePopupOpen}
+          onClose={closeAllPopups}
         />
-
-        <div className="popup  confirm-delete">
-          <div className="popup__container">
-            <button className="popup__close  link-effect" type="button"></button>
-            <h2 className="popup__title">Вы уверены?</h2>
-            <form className="popup__form" name="form" noValidate>
-              <button className="popup__submit" type="submit">Да</button>
-            </form>
-          </div>
-        </div>
-
+        <Footer />
       </div>
     </CurrentUserContext.Provider>
   )

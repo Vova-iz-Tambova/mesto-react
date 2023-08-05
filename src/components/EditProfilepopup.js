@@ -13,14 +13,11 @@ function EditProfilePopup(props) {
   React.useEffect(() => {
     setName(currentUser.name)
     setDescription(currentUser.about)
-  }, [currentUser])
+  }, [currentUser, props.isOpen])
 
   function handleSubmit(e) {
     e.preventDefault()
-    props.onUpdateUser({
-      name,
-      about: description,
-    })
+    props.onUpdateUser({ name, about: description })
   }
 
   return (
@@ -29,38 +26,35 @@ function EditProfilePopup(props) {
       name="edit-profile"
       isOpen={props.isOpen}
       onClose={props.onClose}
-      onSubmit={handleSubmit}
-      children={
-        <>
-          <div className="popup__field">
-            <input required
-              id="profileName"
-              name="profileName"
-              type="text"
-              minLength="2"
-              maxLength="40"
-              className="popup__input  popup__input_profile_name"
-              placeholder="Введите имя"
-              value={name}
-              onChange={handleName} />
-            <span id="profileName-error" className="popup__error"></span>
-          </div>
-          <div className="popup__field">
-            <input required
-              id="profileStatus"
-              name="profileStatus"
-              type="text"
-              minLength="2"
-              maxLength="200"
-              className="popup__input  popup__input_profile_job"
-              placeholder="Введите статус"
-              value={description}
-              onChange={handleDescription} />
-            <span id="profileStatus-error" className="popup__error"> </span>
-          </div>
-        </>
-      }
-    />
+      buttonText="Сохранить"
+      onSubmit={handleSubmit}>
+      <div className="popup__field">
+        <input required
+          id="profileName"
+          name="profileName"
+          type="text"
+          minLength="2"
+          maxLength="40"
+          className="popup__input  popup__input_profile_name"
+          placeholder="Введите имя"
+          value={name || ''}
+          onChange={handleName} />
+        <span id="profileName-error" className="popup__error"></span>
+      </div>
+      <div className="popup__field">
+        <input required
+          id="profileStatus"
+          name="profileStatus"
+          type="text"
+          minLength="2"
+          maxLength="200"
+          className="popup__input  popup__input_profile_job"
+          placeholder="Введите статус"
+          value={description || ''}
+          onChange={handleDescription} />
+        <span id="profileStatus-error" className="popup__error"> </span>
+      </div>
+    </PopupWithForm>
   )
 }
 
