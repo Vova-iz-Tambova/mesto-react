@@ -6,6 +6,7 @@ import PopupWithForm from './PopupWithForm'
 import ImagePopup from './ImagePopup'
 import api from '../utils/Api'
 import CurrentUserContext from '../contexts/CurrentUserContext'
+import EditProfilePopup from './EditProfilepopup'
 
 function App() {
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false)
@@ -50,11 +51,19 @@ function App() {
     }).catch(console.error)
   }
 
-  function handleCardDelete(card){
+  function handleCardDelete(card) {
     api.delMyCard(card._id)
-    .then(() => {
-      setCards((state) => state.filter((c) => c._id !== card._id))
-    }).catch(console.error)
+      .then(() => {
+        setCards((state) => state.filter((c) => c._id !== card._id))
+      }).catch(console.error)
+  }
+
+  function handleUpdateUser({ name, about }) {
+    api.setUserInfo({ name, about })
+      .then(res => {
+        setCurrentUser(res)
+        closeAllPopups()
+      }).catch(console.error)
   }
 
   return (
@@ -70,6 +79,11 @@ function App() {
           onCardLike={handleCardLike}
           onCardDelete={handleCardDelete}
         />
+        <EditProfilePopup
+          isOpen={isEditProfilePopupOpen}
+          onClose={closeAllPopups}
+          onUpdateUser={handleUpdateUser}
+        />
         <Footer />
 
         <PopupWithForm
@@ -80,24 +94,6 @@ function App() {
                 className="popup__input  popup__input_avatar_link" placeholder="Ссылка на картинку" />
               <span id="profileAvatar-error" className="popup__error"></span>
             </div>
-          }
-        />
-
-        <PopupWithForm
-          title="Редактировать профиль" name="edit-profile" isOpen={isEditProfilePopupOpen} onClose={closeAllPopups}
-          children={
-            <>
-              <div className="popup__field">
-                <input id="profileName" name="profileName" type="text" minLength="2" maxLength="40" required
-                  className="popup__input  popup__input_profile_name" placeholder="Введите имя" />
-                <span id="profileName-error" className="popup__error"></span>
-              </div>
-              <div className="popup__field">
-                <input id="profileStatus" name="profileStatus" type="text" minLength="2" maxLength="200" required
-                  className="popup__input  popup__input_profile_job" placeholder="Введите статус" />
-                <span id="profileStatus-error" className="popup__error"> </span>
-              </div>
-            </>
           }
         />
 
