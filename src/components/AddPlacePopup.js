@@ -24,8 +24,8 @@ function AddPlacePopup(props) {
       name="add-place"
       isOpen={props.isOpen}
       onClose={props.onClose}
-      buttonText="Cохранить"
-      onSubmit={handleSubmit}>
+      onSubmit={handleSubmit}
+      buttonText="Сохранить">
       <div className="popup__field">
         <input required
           id="name"
