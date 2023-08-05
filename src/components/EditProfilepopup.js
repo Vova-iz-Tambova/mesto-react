@@ -25,17 +25,37 @@ function EditProfilePopup(props) {
 
   return (
     <PopupWithForm
-      title="Редактировать профиль" name="edit-profile" isOpen={props.isOpen} onClose={props.onClose} onSubmit={handleSubmit}
+      title="Редактировать профиль"
+      name="edit-profile"
+      isOpen={props.isOpen}
+      onClose={props.onClose}
+      onSubmit={handleSubmit}
       children={
         <>
           <div className="popup__field">
-            <input id="profileName" name="profileName" type="text" minLength="2" maxLength="40" required
-              className="popup__input  popup__input_profile_name" placeholder="Введите имя" value={name} onChange={handleName} />
+            <input required
+              id="profileName"
+              name="profileName"
+              type="text"
+              minLength="2"
+              maxLength="40"
+              className="popup__input  popup__input_profile_name"
+              placeholder="Введите имя"
+              value={name}
+              onChange={handleName} />
             <span id="profileName-error" className="popup__error"></span>
           </div>
           <div className="popup__field">
-            <input id="profileStatus" name="profileStatus" type="text" minLength="2" maxLength="200" required
-              className="popup__input  popup__input_profile_job" placeholder="Введите статус" value={description} onChange={handleDescription} />
+            <input required
+              id="profileStatus"
+              name="profileStatus"
+              type="text"
+              minLength="2"
+              maxLength="200"
+              className="popup__input  popup__input_profile_job"
+              placeholder="Введите статус"
+              value={description}
+              onChange={handleDescription} />
             <span id="profileStatus-error" className="popup__error"> </span>
           </div>
         </>
