@@ -7,6 +7,7 @@ import ImagePopup from './ImagePopup'
 import api from '../utils/Api'
 import CurrentUserContext from '../contexts/CurrentUserContext'
 import EditProfilePopup from './EditProfilepopup'
+import EditAvatarPopup from './EditAvatarPopup'
 
 function App() {
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false)
@@ -66,6 +67,14 @@ function App() {
       }).catch(console.error)
   }
 
+  function handleUpdateAvatar({ avatar }) {
+    api.setUserAvatar({ avatar })
+      .then(res => {
+        setCurrentUser(res)
+        closeAllPopups()
+      }).catch(console.error)
+  }
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="page__content">
@@ -84,18 +93,12 @@ function App() {
           onClose={closeAllPopups}
           onUpdateUser={handleUpdateUser}
         />
-        <Footer />
-
-        <PopupWithForm
-          title="Обновить аватар" name="edit-avatar" isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups}
-          children={
-            <div className="popup__field">
-              <input id="profileAvatar" name="profileAvatar" type="url" required
-                className="popup__input  popup__input_avatar_link" placeholder="Ссылка на картинку" />
-              <span id="profileAvatar-error" className="popup__error"></span>
-            </div>
-          }
+        <EditAvatarPopup
+          isOpen={isEditAvatarPopupOpen}
+          onClose={closeAllPopups}
+          onUpdateAvatar={handleUpdateAvatar}
         />
+        <Footer />
 
         <PopupWithForm
           title="Новое место" name="add-place" isOpen={isAddPlacePopupOpen} onClose={closeAllPopups}
