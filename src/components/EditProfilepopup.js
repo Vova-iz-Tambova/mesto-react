@@ -37,7 +37,7 @@ function EditProfilePopup(props) {
           maxLength="40"
           className="popup__input  popup__input_profile_name"
           placeholder="Введите имя"
-          value={name || ''}
+          value={name}
           onChange={handleName} />
         <span id="profileName-error" className="popup__error"></span>
       </div>
@@ -50,7 +50,7 @@ function EditProfilePopup(props) {
           maxLength="200"
           className="popup__input  popup__input_profile_job"
           placeholder="Введите статус"
-          value={description || ''}
+          value={description}
           onChange={handleDescription} />
         <span id="profileStatus-error" className="popup__error"> </span>
       </div>
